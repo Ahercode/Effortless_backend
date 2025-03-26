@@ -63,7 +63,6 @@ class Journal(models.Model):
     subscriberId = models.ForeignKey(Subscriber, on_delete=models.CASCADE)
     note = models.TextField()
     prepared_by = models.CharField(max_length=100)
-
     def __str__(self):
         return self.journal_number
 
