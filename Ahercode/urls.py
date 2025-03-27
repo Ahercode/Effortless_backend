@@ -34,7 +34,7 @@ urlpatterns = [
     path('inExDetails/create/', InExDetailsCreateView.as_view()),
     path('inExDetails/<int:pk>/', InExDetailsView.as_view()),
     path('transactions/', TransactionsListView.as_view()),
-    path('transactions/create', TransactionsCreateView.as_view()),
+    path('transactions/create/', TransactionsCreateView.as_view()),
     path('transactions/<int:pk>/', TransactionsDetailView.as_view()),
 
 
