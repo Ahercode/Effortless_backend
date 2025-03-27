@@ -63,6 +63,7 @@ class JournalHeaders(models.Model):
     subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
     note = models.TextField(blank=True, null=True)
     prepared_by = models.CharField(max_length=100)
+    posted = models.BooleanField(default=False)
     def __str__(self):
         return self.journal_number
 
@@ -78,6 +79,7 @@ class Journals(models.Model):
     debit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     credit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     transaction_date = models.DateField()
+
 
     def __str__(self):
         return self.reference_number
