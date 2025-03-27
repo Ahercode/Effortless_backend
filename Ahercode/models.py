@@ -1,3 +1,5 @@
+
+
 from django.db import models
 
 # Create your models here.
@@ -16,26 +18,27 @@ class User(models.Model):
         return self.username
 
 
-class Subscriber(models.Model):
+class Subscribers(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     company_name = models.CharField(max_length=100)
     company_type = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
-    alternative_email = models.EmailField(unique=True)
+    alternative_email = models.EmailField(unique=True, blank=True, null=True)
     phone = models.CharField(max_length=15)
     address = models.TextField()
-    description = models.TextField()
-    tax_id = models.CharField(max_length=50)
+    description = models.TextField(blank=True, null=True)
+    tax_id = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
 class Account(models.Model):
-    account_header = models.CharField(max_length=100)
-    account = models.CharField(max_length=100)
-    type = models.CharField(max_length=50)
-    line = models.CharField(max_length=50)
+    account_header = models.CharField(max_length=100, null=True, blank=True)
+    account = models.CharField(max_length=100, null=True, blank=True)
+    type = models.CharField(max_length=50, null=True, blank=True)
+    line = models.CharField(max_length=50, blank=True, null=True)
+    count = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.account_header
@@ -48,48 +51,62 @@ class Party(models.Model):
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15)
     address = models.TextField()
-    account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    expense_count = models.IntegerField()
-    expense_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    alternate_email = models.EmailField(unique=True)
+    alternate_email = models.EmailField(unique=True, blank=True, null=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
 
-class Journal(models.Model):
-    date = models.DateField()
+class JournalHeaders(models.Model):
+    transaction_date = models.DateField()
     journal_number = models.CharField(max_length=100)
-    subscriberId = models.ForeignKey(Subscriber, on_delete=models.CASCADE)
-    note = models.TextField()
+    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
+    note = models.TextField(blank=True, null=True)
     prepared_by = models.CharField(max_length=100)
     def __str__(self):
         return self.journal_number
 
 
-class JournalDetails(models.Model):
+class Journals(models.Model):
+    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    journal = models.ForeignKey(Journal, on_delete=models.CASCADE)
+    journal = models.ForeignKey(JournalHeaders, on_delete=models.CASCADE)
     reference_number = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    transaction_type = models.CharField(max_length=100)
+    transaction_type = models.CharField(max_length=100, default="journal")
+    debit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    credit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    transaction_date = models.DateField()
 
     def __str__(self):
         return self.reference_number
 
+class InExDetails(models.Model):
+    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    party = models.ForeignKey(Party, on_delete=models.CASCADE)
+    transaction_date = models.DateField()
+    reference_number = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    transaction_type = models.CharField(max_length=100)
+    status = models.CharField(max_length=100, default="unreconciled")
+    posted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.reference_number
 
 class Transactions(models.Model):
-    transaction_type = models.CharField(max_length=100)
+    bach_id = models.CharField(max_length=100, default="000-000")
+    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    subscriber = models.ForeignKey(Subscriber, on_delete=models.CASCADE)
-    party = models.ForeignKey(Party, on_delete=models.CASCADE)
-    date = models.DateField()
+    transaction_date = models.DateField()
     reference_number = models.CharField(max_length=100)
-    description = models.TextField()
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    outstanding = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.CharField(max_length=100)
+    transaction_type = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+    debit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    credit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     def __str__(self):
         return self.reference_number

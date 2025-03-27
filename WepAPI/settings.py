@@ -32,9 +32,11 @@ INSTALLED_APPS = [
     'Ahercode.apps.AhercodeConfig',
     'rest_framework',
     'drf_yasg',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,6 +49,13 @@ MIDDLEWARE = [
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:5174",
+    "https://app.sipconsult.net"
+    # Add other origins as needed
+]
 
 ROOT_URLCONF = 'WepAPI.urls'
 
@@ -91,8 +100,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'effortless_db',
         'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'db',
+        'PASSWORD': 'Chab2019',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
