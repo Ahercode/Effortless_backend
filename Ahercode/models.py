@@ -78,7 +78,6 @@ class Journals(models.Model):
     debit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     credit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     transaction_date = models.DateField()
-    posted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.reference_number
