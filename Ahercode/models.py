@@ -99,7 +99,7 @@ class InExDetails(models.Model):
         return self.reference_number
 
 class Transactions(models.Model):
-    bach_id = models.CharField(max_length=100, default="000-000", blank=True, null=True)
+    bach_id = models.CharField(max_length=100, default="00000-00000", blank=True, null=True)
     subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     transaction_date = models.DateField()
