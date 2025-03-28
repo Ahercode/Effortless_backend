@@ -100,7 +100,7 @@ class InExDetails(models.Model):
         return self.reference_number
 
 class Transactions(models.Model):
-    bach_id = models.CharField(max_length=100, default="00000-00000", blank=True, null=True)
+    bach_id = models.CharField(max_length=100, blank=True, null=True)
     subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     transaction_date = models.DateField()
@@ -109,6 +109,22 @@ class Transactions(models.Model):
     description = models.TextField(blank=True, null=True)
     debit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     credit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.bach_id:  # Generate only if batch_id is empty
+            last_transaction = Transactions.objects.filter(
+                subscriber=self.subscriber
+            ).order_by('-id').first()
+
+            if last_transaction and last_transaction.bach_id:
+                last_number = int(last_transaction.bach_id.split('-')[1])  # Extract last part
+                next_number = last_number + 1
+            else:
+                next_number = 1  # First transaction for this subscriber
+
+            self.bach_id = f"{self.subscriber.id:05d}-{next_number:05d}"
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.reference_number
