@@ -1,6 +1,7 @@
 from django.urls import path, include
 
-from .views.accountView import AccountListView, AccountCreateView, AccountDetailView
+from .views.accountDetailsView import AccountDetailView, AccountDetailListView, AccountDetailCreateView
+from .views.accountView import AccountListView, AccountCreateView, AccountView
 from .views.inExDetailsView import InExDetailsListView, InExDetailsCreateView, InExDetailsView
 from .views.journalDetailsView import JournalDetailsCreateView, JournalDetailsListView, \
     JournalDetailsView
@@ -20,7 +21,10 @@ urlpatterns = [
     path('subscribers/<int:pk>/', SubscriberDetailView.as_view()),
     path('accounts/', AccountListView.as_view()),
     path('accounts/create/', AccountCreateView.as_view()),
-    path('accounts/<int:pk>/', AccountDetailView.as_view()),
+    path('accounts/<int:pk>/', AccountView.as_view()),
+    path('accountDetails/', AccountDetailListView.as_view()),
+    path('accountDetails/create/', AccountDetailCreateView.as_view()),
+    path('accountDetails/<int:pk>/', AccountDetailView.as_view()),
     path('journalHeaders/', JournalHeaderListView.as_view()),
     path('journalHeaders/create/', JournalHeaderCreateView.as_view()),
     path('journalHeaders/<int:pk>/', JournalHeaderView.as_view()),

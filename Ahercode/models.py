@@ -43,6 +43,17 @@ class Account(models.Model):
     def __str__(self):
         return self.account_header
 
+class AccountDetails(models.Model):
+    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    note = models.TextField(blank=True, null=True)
+
+    class Meta:
+        db_table = 'Ahercode_account_details'
+
+    def __str__(self):
+        return self.account
+
 
 class Party(models.Model):
     first_name = models.CharField(max_length=100)
