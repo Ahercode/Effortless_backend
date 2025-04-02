@@ -1,8 +1,12 @@
 from django.urls import path, include
 
-from .views.accountView import AccountListView, AccountCreateView, AccountDetailView
-from .views.journalDetailsView import JournalDetailsDetailView, JournalDetailsCreateView, JournalDetailsListView
-from .views.journalView import JournalListView, JournalCreateView, JournalDetailView
+from .views.accountDetailsView import AccountDetailView, AccountDetailListView, AccountDetailCreateView
+from .views.accountView import AccountListView, AccountCreateView, AccountView
+from .views.inExDetailsView import InExDetailsListView, InExDetailsCreateView, InExDetailsView
+from .views.journalDetailsView import JournalDetailsCreateView, JournalDetailsListView, \
+    JournalDetailsView
+from .views.journalHeaderView import JournalHeaderListView, \
+    JournalHeaderCreateView, JournalHeaderView
 from .views.partyView import PartyListView, PartyCreateView, PartyDetailView
 from .views.transactionsView import TransactionsListView, TransactionsDetailView, TransactionsCreateView
 from .views.userView import UserCreateView, UserListView, UserDetailView
@@ -17,18 +21,24 @@ urlpatterns = [
     path('subscribers/<int:pk>/', SubscriberDetailView.as_view()),
     path('accounts/', AccountListView.as_view()),
     path('accounts/create/', AccountCreateView.as_view()),
-    path('accounts/<int:pk>/', AccountDetailView.as_view()),
-    path('journals/', JournalListView.as_view()),
-    path('journals/create/', JournalCreateView.as_view()),
-    path('journals/<int:pk>/', JournalDetailView.as_view()),
-    path('journalDetails/', JournalDetailsListView.as_view()),
-    path('journalDetails/create/', JournalDetailsCreateView.as_view()),
-    path('journalDetails/<int:pk>/', JournalDetailsDetailView.as_view()),
+    path('accounts/<int:pk>/', AccountView.as_view()),
+    path('accountDetails/', AccountDetailListView.as_view()),
+    path('accountDetails/create/', AccountDetailCreateView.as_view()),
+    path('accountDetails/<int:pk>/', AccountDetailView.as_view()),
+    path('journalHeaders/', JournalHeaderListView.as_view()),
+    path('journalHeaders/create/', JournalHeaderCreateView.as_view()),
+    path('journalHeaders/<int:pk>/', JournalHeaderView.as_view()),
+    path('journals/', JournalDetailsListView.as_view()),
+    path('journals/create/', JournalDetailsCreateView.as_view()),
+    path('journals/<int:pk>/', JournalDetailsView.as_view()),
     path('parties/', PartyListView.as_view()),
     path('parties/create/', PartyCreateView.as_view()),
     path('parties/<int:pk>/', PartyDetailView.as_view()),
+    path('inExDetails/', InExDetailsListView.as_view()),
+    path('inExDetails/create/', InExDetailsCreateView.as_view()),
+    path('inExDetails/<int:pk>/', InExDetailsView.as_view()),
     path('transactions/', TransactionsListView.as_view()),
-    path('transactions/create', TransactionsCreateView.as_view()),
+    path('transactions/create/', TransactionsCreateView.as_view()),
     path('transactions/<int:pk>/', TransactionsDetailView.as_view()),
 
 

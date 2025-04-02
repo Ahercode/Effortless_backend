@@ -32,9 +32,11 @@ INSTALLED_APPS = [
     'Ahercode.apps.AhercodeConfig',
     'rest_framework',
     'drf_yasg',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,6 +49,14 @@ MIDDLEWARE = [
 DEBUG = False
 
 ALLOWED_HOSTS = ['*','http://app.sipconsult.net/']
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:5174",
+    "http://localhost:5173",
+    "https://app.sipconsult.net"
+    # Add other origins as needed
+]
 
 ROOT_URLCONF = 'WepAPI.urls'
 

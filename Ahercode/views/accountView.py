@@ -22,7 +22,7 @@ class AccountListView(generics.ListAPIView):
     serializer_class = AccountSerializer
 
 # Get a single Account, update, and delete
-class AccountDetailView(generics.RetrieveUpdateDestroyAPIView):
+class AccountView(generics.RetrieveUpdateDestroyAPIView):
     """
     API view to retrieve, update or delete an Account
     """
