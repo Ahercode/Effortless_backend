@@ -44,9 +44,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','http://app.sipconsult.net/']
 
 ROOT_URLCONF = 'WepAPI.urls'
 
@@ -91,8 +91,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'effortless_db',
         'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'db',
+        'PASSWORD': 'SIPConsult@18',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
