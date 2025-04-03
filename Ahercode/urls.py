@@ -8,6 +8,7 @@ from .views.journalDetailsView import JournalDetailsCreateView, JournalDetailsLi
 from .views.journalHeaderView import JournalHeaderListView, \
     JournalHeaderCreateView, JournalHeaderView
 from .views.partyView import PartyListView, PartyCreateView, PartyDetailView
+from .views.subscriberUsers import SubscriberUserListView, SubscriberUserCreateView, SubscriberUserDetailView
 from .views.transactionsView import TransactionsListView, TransactionsDetailView, TransactionsCreateView
 from .views.userView import UserCreateView, UserListView, UserDetailView
 from .views.subscriberView import SubscriberListView, SubscriberCreateView, SubscriberDetailView
@@ -19,6 +20,9 @@ urlpatterns = [
     path('subscribers/', SubscriberListView.as_view()),
     path('subscribers/create/', SubscriberCreateView.as_view()),
     path('subscribers/<int:pk>/', SubscriberDetailView.as_view()),
+    path('subscriberUsers/', SubscriberUserListView.as_view()),
+    path('subscriberUsers/create/', SubscriberUserCreateView.as_view()),
+    path('subscriberUsers/<int:pk>/', SubscriberUserDetailView.as_view()),
     path('accounts/', AccountListView.as_view()),
     path('accounts/create/', AccountCreateView.as_view()),
     path('accounts/<int:pk>/', AccountView.as_view()),

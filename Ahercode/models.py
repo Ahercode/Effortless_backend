@@ -29,9 +29,18 @@ class Subscribers(models.Model):
     address = models.TextField()
     description = models.TextField(blank=True, null=True)
     tax_id = models.CharField(max_length=50, blank=True, null=True)
+    status = models.CharField(max_length=100, default="")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+class SubscriberUsers(models.Model):
+    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
+    user_id = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.user_id
 
 class Account(models.Model):
     account_header = models.CharField(max_length=100, null=True, blank=True)
@@ -56,6 +65,7 @@ class AccountDetails(models.Model):
 
 
 class Party(models.Model):
+    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE, default=0)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     type = models.CharField(max_length=50)

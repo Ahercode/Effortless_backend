@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, JournalHeaders, Subscribers, Account, AccountDetails, Party, Journals, Transactions, InExDetails
+from .models import User, JournalHeaders, Subscribers, SubscriberUsers, Account, AccountDetails, Party, Journals, Transactions, InExDetails
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,6 +10,11 @@ class UserSerializer(serializers.ModelSerializer):
 class SubscriberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscribers
+        fields = '__all__'
+
+class SubscriberUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubscriberUsers
         fields = '__all__'
 
 class AccountSerializer(serializers.ModelSerializer):
