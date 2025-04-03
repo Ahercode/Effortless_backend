@@ -46,9 +46,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','http://app.sipconsult.net/']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -101,7 +101,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'effortless_db',
         'USER': 'root',
-        'PASSWORD': 'Chab2019',
+        'PASSWORD': 'SIPConsult@18',
         'HOST': 'localhost',
         'PORT': '3306',
     }
