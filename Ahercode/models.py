@@ -149,3 +149,15 @@ class Transactions(models.Model):
 
     def __str__(self):
         return self.reference_number
+
+class CalendarEvents(models.Model):
+    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    start_date= models.DateField()
+    end_date = models.DateField()
+    description = models.TextField(blank=True, null=True)
+    status = models.CharField(max_length=100, default="")
+    frequency = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
