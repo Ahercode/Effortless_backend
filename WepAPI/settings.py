@@ -48,7 +48,7 @@ MIDDLEWARE = [
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['*','http://app.sipconsult.net/']
+ALLOWED_HOSTS = ['*','https://app.sipconsult.net/']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
