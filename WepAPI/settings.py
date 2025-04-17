@@ -50,6 +50,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*', 'app.sipconsult.net']
 
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5174",
@@ -102,7 +103,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'effortless_db',
         'USER': 'root',
-        'PASSWORD': 'SIPConsult@18',
+        'PASSWORD': 'Chab2019',
         'HOST': 'localhost',
         'PORT': '3306',
     }

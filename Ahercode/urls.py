@@ -2,13 +2,14 @@ from django.urls import path, include
 
 from .views.accountDetailsView import AccountDetailView, AccountDetailListView, AccountDetailCreateView
 from .views.accountView import AccountListView, AccountCreateView, AccountView
+from .views.calendarEventsView import CalendarEventListView, CalendarEventCreateView, CalendarEventView
 from .views.inExDetailsView import InExDetailsListView, InExDetailsCreateView, InExDetailsView
 from .views.journalDetailsView import JournalDetailsCreateView, JournalDetailsListView, \
     JournalDetailsView
 from .views.journalHeaderView import JournalHeaderListView, \
     JournalHeaderCreateView, JournalHeaderView
 from .views.partyView import PartyListView, PartyCreateView, PartyDetailView
-from .views.subscriberUsers import SubscriberUserListView, SubscriberUserCreateView, SubscriberUserDetailView
+from .views.subscriberUsersView import SubscriberUserListView, SubscriberUserCreateView, SubscriberUserDetailView
 from .views.transactionsView import TransactionsListView, TransactionsDetailView, TransactionsCreateView
 from .views.userView import UserCreateView, UserListView, UserDetailView
 from .views.subscriberView import SubscriberListView, SubscriberCreateView, SubscriberDetailView
@@ -45,6 +46,9 @@ urlpatterns = [
     path('transactions/', TransactionsListView.as_view()),
     path('transactions/create/', TransactionsCreateView.as_view()),
     path('transactions/<int:pk>/', TransactionsDetailView.as_view()),
+    path('calendarEvents/', CalendarEventListView.as_view()),
+    path('calendarEvents/create/', CalendarEventCreateView.as_view()),
+    path('calendarEvents/<int:pk>/', CalendarEventView.as_view()),
 
 
 ]
