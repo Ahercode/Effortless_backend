@@ -14,6 +14,7 @@ from .views.userView import UserCreateView, UserListView, UserDetailView
 from .views.subscriberView import SubscriberListView, SubscriberCreateView, SubscriberDetailView
 
 urlpatterns = [
+    
     path('users/', UserListView.as_view()),
     path('users/create/', UserCreateView.as_view()),
     path('users/<int:pk>/', UserDetailView.as_view()),

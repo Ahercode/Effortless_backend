@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='journals',
             name='subscriber',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to='Ahercode.subscribers'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Ahercode.subscribers'),
         ),
     ]
