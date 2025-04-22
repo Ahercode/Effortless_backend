@@ -48,14 +48,16 @@ MIDDLEWARE = [
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['*','https://app.sipconsult.net/']
+ALLOWED_HOSTS = ['*', 'app.sipconsult.net']
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5174",
     "http://localhost:5173",
-    "https://app.sipconsult.net"
-    # Add other origins as needed
+    "https://app.sipconsult.net",
+    "http://app.sipconsult.net:8000"
+
 ]
 
 ROOT_URLCONF = 'WepAPI.urls'

@@ -66,7 +66,7 @@ class AccountDetails(models.Model):
 
 
 class Party(models.Model):
-    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE, default=0)
+    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE, null=True, blank=True)  # Allow null values
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     type = models.CharField(max_length=50)
