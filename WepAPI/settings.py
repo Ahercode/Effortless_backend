@@ -101,7 +101,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'effortless_db',
         'USER': 'root',
-        'PASSWORD': 'Chab2019',
+        'PASSWORD': 'SIPConsult@18',
         'HOST': 'localhost',
         'PORT': '3306',
     }

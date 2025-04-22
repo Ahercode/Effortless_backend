@@ -115,6 +115,7 @@ class InExDetails(models.Model):
     description = models.TextField(blank=True, null=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     transaction_type = models.CharField(max_length=100)
+    selected_bank = models.IntegerField(default=0)
     status = models.CharField(max_length=100, default="unreconciled")
     posted = models.BooleanField(default=False)
 
