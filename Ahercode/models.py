@@ -38,7 +38,7 @@ class Subscribers(models.Model):
 class SubscriberUsers(models.Model):
     subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
     user_id = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
+    password = models.CharField(max_length=100, default="")
 
     def __str__(self):
         return self.user_id
@@ -48,7 +48,7 @@ class Account(models.Model):
     account = models.CharField(max_length=100, null=True, blank=True)
     type = models.CharField(max_length=50, null=True, blank=True)
     line = models.CharField(max_length=50, blank=True, null=True)
-    count = models.IntegerField(blank=True, null=True)
+
 
     def __str__(self):
         return self.account_header
@@ -57,6 +57,7 @@ class AccountDetails(models.Model):
     subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     note = models.TextField(blank=True, null=True)
+    count = models.IntegerField(blank=True, null=True)
 
     class Meta:
         db_table = 'Ahercode_account_details'

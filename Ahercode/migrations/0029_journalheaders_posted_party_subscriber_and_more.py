@@ -1,4 +1,5 @@
 import django.db.models.deletion
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
@@ -16,6 +17,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='party',
             name='subscriber',
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='Ahercode.subscribers',
+                null=True,
+                blank=True,
+            ),
         ),
         migrations.AddField(
             model_name='subscribers',
