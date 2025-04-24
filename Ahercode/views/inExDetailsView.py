@@ -4,10 +4,10 @@ from Ahercode.models import InExDetails
 from Ahercode.serializers import InExDetailsSerializer
 
 
-# Create a new JournalDetail
+# Create a new inExDetail
 class InExDetailsCreateView(generics.CreateAPIView):
     """
-    API view to create a new journalDetail entry.
+    API view to create a new inExDetail entry.
     """
     queryset = InExDetails.objects.all()
     serializer_class = InExDetailsSerializer
@@ -15,7 +15,7 @@ class InExDetailsCreateView(generics.CreateAPIView):
 # Get all JournalDetails
 class InExDetailsListView(generics.ListAPIView):
     """
-    API view to retrieve a list of journalDetail entries.
+    API view to retrieve a list of inExDetail entries.
     """
     queryset = InExDetails.objects.all()
     serializer_class = InExDetailsSerializer
@@ -23,7 +23,7 @@ class InExDetailsListView(generics.ListAPIView):
 # Get a single JournalDetail, update, and delete
 class InExDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """
-    API view to retrieve, update, or delete a journalDetail entry.
+    API view to retrieve, update, or delete a inExDetail entry.
     """
     queryset = InExDetails.objects.all()
     serializer_class = InExDetailsSerializer
