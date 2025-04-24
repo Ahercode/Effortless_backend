@@ -57,7 +57,6 @@ class AccountDetails(models.Model):
     subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     note = models.TextField(blank=True, null=True)
-    count = models.IntegerField(blank=True, null=True)
 
     class Meta:
         db_table = 'Ahercode_account_details'
