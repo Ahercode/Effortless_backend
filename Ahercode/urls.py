@@ -2,6 +2,7 @@ from django.urls import path, include
 
 from .views.accountDetailsView import AccountDetailView, AccountDetailListView, AccountDetailCreateView
 from .views.accountView import AccountListView, AccountCreateView, AccountView
+from .views.assetsView import AssetsListView, AssetsCreateView, AssetsView
 from .views.calendarEventsView import CalendarEventListView, CalendarEventCreateView, CalendarEventView
 from .views.inExDetailsView import InExDetailsListView, InExDetailsCreateView, InExDetailsView
 from .views.journalDetailsView import JournalDetailsCreateView, JournalDetailsListView, \
@@ -14,6 +15,7 @@ from .views.transactionsView import TransactionsListView, TransactionsDetailView
 from .views.userView import UserCreateView, UserListView, UserDetailView
 from .views.authView import LoginView, ChangePasswordView, ResetPasswordView
 from .views.subscriberView import SubscriberListView, SubscriberCreateView, SubscriberDetailView, SubscriberApprovalView
+
 
 urlpatterns = [
     
@@ -54,6 +56,7 @@ urlpatterns = [
     path('calendarEvents/', CalendarEventListView.as_view()),
     path('calendarEvents/create/', CalendarEventCreateView.as_view()),
     path('calendarEvents/<int:pk>/', CalendarEventView.as_view()),
-
-
+    path('assets/', AssetsListView.as_view()),
+    path('assets/create/', AssetsCreateView.as_view()),
+    path('assets/<int:pk>/', AssetsView.as_view()),
 ]

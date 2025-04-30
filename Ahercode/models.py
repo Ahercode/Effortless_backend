@@ -39,7 +39,7 @@ class Subscribers(models.Model):
 class SubscriberUsers(models.Model):
     subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
     user_id = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
+    password = models.CharField(max_length=100, default="")
 
     def __str__(self):
         return self.user_id
@@ -49,7 +49,7 @@ class Account(models.Model):
     account = models.CharField(max_length=100, null=True, blank=True)
     type = models.CharField(max_length=50, null=True, blank=True)
     line = models.CharField(max_length=50, blank=True, null=True)
-    count = models.IntegerField(blank=True, null=True)
+
 
     def __str__(self):
         return self.account_header
@@ -116,6 +116,7 @@ class InExDetails(models.Model):
     description = models.TextField(blank=True, null=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     transaction_type = models.CharField(max_length=100)
+    selected_bank = models.IntegerField(default=0)
     status = models.CharField(max_length=100, default="unreconciled")
     posted = models.BooleanField(default=False)
 
@@ -163,3 +164,14 @@ class CalendarEvents(models.Model):
 
     def __str__(self):
         return self.title
+
+class Assets(models.Model):
+    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
+    expense = models.ForeignKey(InExDetails, on_delete=models.CASCADE)
+    date = models.DateField()
+    description = models.TextField(blank=True, null=True)
+    serial_number = models.CharField(max_length=100)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.serial_number

@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import User, JournalHeaders, Subscribers, SubscriberUsers, Account, AccountDetails, Party, Journals, Transactions, InExDetails, CalendarEvents
+from .models import User, JournalHeaders, Subscribers, SubscriberUsers, Account, AccountDetails, Party, Journals, \
+    Transactions, InExDetails, CalendarEvents, Assets
+
 
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -96,4 +98,9 @@ class TransactionsSerializer(serializers.ModelSerializer):
 class CalendarEventsSerializer(serializers.ModelSerializer):
     class Meta:
         model = CalendarEvents
+        fields = '__all__'
+
+class AssetsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Assets
         fields = '__all__'
