@@ -29,8 +29,9 @@ class Subscribers(models.Model):
     address = models.TextField()
     description = models.TextField(blank=True, null=True)
     tax_id = models.CharField(max_length=50, blank=True, null=True)
-    status = models.CharField(max_length=100, default="")
+    status = models.CharField(max_length=100, default="pending")
     password = models.CharField(max_length=100, default="")
+    is_email_verified = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -152,7 +153,7 @@ class Transactions(models.Model):
         return self.reference_number
 
 class CalendarEvents(models.Model):
-    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
+    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE, related_name='calendar_events')
     title = models.CharField(max_length=100)
     start_date= models.DateField()
     end_date = models.DateField()

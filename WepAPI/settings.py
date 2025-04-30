@@ -46,7 +46,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*', 'app.sipconsult.net']
 
@@ -81,12 +81,20 @@ TEMPLATES = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Replace with your SMTP server
+EMAIL_PORT = 587  # Common port for TLS
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'sipconsult.net@gmail.com'
+EMAIL_HOST_PASSWORD = 'sddezjsdnylacxub'
 
 WSGI_APPLICATION = 'WepAPI.wsgi.application'
 
@@ -103,7 +111,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'effortless_db',
         'USER': 'root',
-        'PASSWORD': 'Chab2019',
+        'PASSWORD': 'SIPConsult@18',
         'HOST': 'localhost',
         'PORT': '3306',
     }

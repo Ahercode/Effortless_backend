@@ -12,15 +12,20 @@ from .views.partyView import PartyListView, PartyCreateView, PartyDetailView
 from .views.subscriberUsersView import SubscriberUserListView, SubscriberUserCreateView, SubscriberUserDetailView
 from .views.transactionsView import TransactionsListView, TransactionsDetailView, TransactionsCreateView
 from .views.userView import UserCreateView, UserListView, UserDetailView
-from .views.subscriberView import SubscriberListView, SubscriberCreateView, SubscriberDetailView
+from .views.authView import LoginView, ChangePasswordView, ResetPasswordView
+from .views.subscriberView import SubscriberListView, SubscriberCreateView, SubscriberDetailView, SubscriberApprovalView
 
 urlpatterns = [
     
     path('users/', UserListView.as_view()),
+    path('auth/login/', LoginView.as_view(), name='login'),
+    path('auth/change-password/', ChangePasswordView.as_view(), name='change-password'),
+    path('auth/reset-password/', ResetPasswordView.as_view(), name='reset-password'),
     path('users/create/', UserCreateView.as_view()),
     path('users/<int:pk>/', UserDetailView.as_view()),
     path('subscribers/', SubscriberListView.as_view()),
     path('subscribers/create/', SubscriberCreateView.as_view()),
+    path('subscribers/approval/<int:subscriber_id>/', SubscriberApprovalView.as_view(), name='subscriber-approval'),
     path('subscribers/<int:pk>/', SubscriberDetailView.as_view()),
     path('subscriberUsers/', SubscriberUserListView.as_view()),
     path('subscriberUsers/create/', SubscriberUserCreateView.as_view()),
