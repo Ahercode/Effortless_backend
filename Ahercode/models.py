@@ -174,3 +174,11 @@ class Assets(models.Model):
 
     def __str__(self):
         return self.serial_number
+
+
+class Tips(models.Model):
+    description = models.TextField(blank=True, null=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.date

@@ -1,5 +1,6 @@
 from django.urls import path, include
 
+from .views.TipsView import TipsView, TipsListView, TipsCreateView
 from .views.accountDetailsView import AccountDetailView, AccountDetailListView, AccountDetailCreateView
 from .views.accountView import AccountListView, AccountCreateView, AccountView
 from .views.assetsView import AssetsListView, AssetsCreateView, AssetsView
@@ -54,4 +55,8 @@ urlpatterns = [
     path('assets/', AssetsListView.as_view()),
     path('assets/create/', AssetsCreateView.as_view()),
     path('assets/<int:pk>/', AssetsView.as_view()),
+    path('tips/', TipsListView.as_view()),
+    path('tips/create/', TipsCreateView.as_view()),
+    path('tips/<int:pk>/', TipsView.as_view()),
+
 ]

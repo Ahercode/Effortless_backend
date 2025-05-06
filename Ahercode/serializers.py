@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import User, JournalHeaders, Subscribers, SubscriberUsers, Account, AccountDetails, Party, Journals, \
-    Transactions, InExDetails, CalendarEvents, Assets
+    Transactions, InExDetails, CalendarEvents, Assets, Tips
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -62,4 +62,9 @@ class CalendarEventsSerializer(serializers.ModelSerializer):
 class AssetsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Assets
+        fields = '__all__'
+
+class TipsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tips
         fields = '__all__'
