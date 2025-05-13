@@ -119,6 +119,7 @@ class InExDetails(models.Model):
     selected_bank = models.IntegerField(default=0)
     status = models.CharField(max_length=100, default="unreconciled")
     posted = models.BooleanField(default=False)
+    
 
     def __str__(self):
         return self.reference_number
@@ -164,6 +165,17 @@ class CalendarEvents(models.Model):
 
     def __str__(self):
         return self.title
+
+class CRM(models.Model):
+    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
+    date = models.DateField()
+    note = models.TextField(blank=True, null=True)
+    status = models.CharField(max_length=100, default="")
+    file = models.FileField(upload_to='uploads/', blank=True, null=True)
+
+    def __str__(self):
+        return self.note
+
 
 class Assets(models.Model):
     subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)

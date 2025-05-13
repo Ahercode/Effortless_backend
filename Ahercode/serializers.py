@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, JournalHeaders, Subscribers, SubscriberUsers, Account, AccountDetails, Party, Journals, \
+from .models import CRM, User, JournalHeaders, Subscribers, SubscriberUsers, Account, AccountDetails, Party, Journals, \
     Transactions, InExDetails, CalendarEvents, Assets
 
 
@@ -40,6 +40,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data["email"] = subscriber.email
         data["first_name"] = subscriber.first_name
         data["last_name"] = subscriber.last_name
+        data["company_name"] = subscriber.company_name
         data["id"] = subscriber.id
         
         return data
@@ -99,6 +100,12 @@ class CalendarEventsSerializer(serializers.ModelSerializer):
     class Meta:
         model = CalendarEvents
         fields = '__all__'
+        
+        
+class CRMSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CRM
+        fields = '__all__'    
 
 class AssetsSerializer(serializers.ModelSerializer):
     class Meta:

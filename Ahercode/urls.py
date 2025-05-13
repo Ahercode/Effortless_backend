@@ -1,5 +1,9 @@
 from django.urls import path, include
 
+from Ahercode.views.crmView import CRMCreateView, CRMListView, CRMView
+from WepAPI import settings
+from django.conf.urls.static import static
+
 from .views.accountDetailsView import AccountDetailView, AccountDetailListView, AccountDetailCreateView
 from .views.accountView import AccountListView, AccountCreateView, AccountView
 from .views.assetsView import AssetsListView, AssetsCreateView, AssetsView
@@ -14,7 +18,7 @@ from .views.subscriberUsersView import SubscriberUserListView, SubscriberUserCre
 from .views.transactionsView import TransactionsListView, TransactionsDetailView, TransactionsCreateView
 from .views.userView import UserCreateView, UserListView, UserDetailView
 from .views.authView import LoginView, ChangePasswordView, ResetPasswordView
-from .views.subscriberView import SubscriberListView, SubscriberCreateView, SubscriberDetailView, SubscriberApprovalView
+from .views.subscriberView import SubscriberListView, SubscriberCreateView, SubscriberDetailView, SubscriberApprovalView, SubscriberTransactionDetailsView, SubscriberTransactionSummaryView
 
 
 urlpatterns = [
@@ -32,6 +36,8 @@ urlpatterns = [
     path('subscriberUsers/', SubscriberUserListView.as_view()),
     path('subscriberUsers/create/', SubscriberUserCreateView.as_view()),
     path('subscriberUsers/<int:pk>/', SubscriberUserDetailView.as_view()),
+    path('subscribers/transaction-summary/', SubscriberTransactionSummaryView.as_view(), name='subscriber-transaction-summary'),
+    path('subscribers/transaction-details/', SubscriberTransactionDetailsView.as_view(), name='transaction-details'),
     path('accounts/', AccountListView.as_view()),
     path('accounts/create/', AccountCreateView.as_view()),
     path('accounts/<int:pk>/', AccountView.as_view()),
@@ -56,7 +62,10 @@ urlpatterns = [
     path('calendarEvents/', CalendarEventListView.as_view()),
     path('calendarEvents/create/', CalendarEventCreateView.as_view()),
     path('calendarEvents/<int:pk>/', CalendarEventView.as_view()),
+    path('crm/', CRMListView.as_view()),
+    path('crm/create/', CRMCreateView.as_view()),
+    path('crm/<int:pk>/', CRMView.as_view()),
     path('assets/', AssetsListView.as_view()),
     path('assets/create/', AssetsCreateView.as_view()),
     path('assets/<int:pk>/', AssetsView.as_view()),
-]
+] 

@@ -9,16 +9,21 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7*_30bvb)6-#1_m)d3+_epnv&j)sj)05lcsp(13kjg^zl+!tf%'
+SECRET_KEY = config('SECRET_KEY')
 
 # Application definition
 
@@ -53,7 +58,6 @@ ALLOWED_HOSTS = ['*', 'app.sipconsult.net']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    # "http://localhost:5174",
     "http://localhost:5173",
     "https://app.sipconsult.net",
     "http://app.sipconsult.net:8000",
@@ -92,8 +96,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Replace with your SMTP server
 EMAIL_PORT = 587  # Common port for TLS
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'sipconsult.net@gmail.com'
-EMAIL_HOST_PASSWORD = 'sddezjsdnylacxub'
+
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 WSGI_APPLICATION = 'WepAPI.wsgi.application'
 
@@ -108,11 +113,11 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'effortless_db',
-        'USER': 'root',
-        'PASSWORD': 'SIPConsult@18',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
 
