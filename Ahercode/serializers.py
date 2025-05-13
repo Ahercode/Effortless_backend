@@ -1,6 +1,8 @@
 from rest_framework import serializers
-from .models import CRM, User, JournalHeaders, Subscribers, SubscriberUsers, Account, AccountDetails, Party, Journals, \
+
+from .models import CRM, Tips, User, JournalHeaders, Subscribers, SubscriberUsers, Account, AccountDetails, Party, Journals, \
     Transactions, InExDetails, CalendarEvents, Assets
+
 
 
 
@@ -110,4 +112,9 @@ class CRMSerializer(serializers.ModelSerializer):
 class AssetsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Assets
+        fields = '__all__'
+
+class TipsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tips
         fields = '__all__'

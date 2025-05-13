@@ -1,9 +1,13 @@
 from django.urls import path, include
 
+<<<<<<< HEAD
 from Ahercode.views.crmView import CRMCreateView, CRMListView, CRMView
 from WepAPI import settings
 from django.conf.urls.static import static
 
+=======
+from .views.TipsView import TipsView, TipsListView, TipsCreateView
+>>>>>>> 578fea32dc433a8648e0bfd1d7492890c4699262
 from .views.accountDetailsView import AccountDetailView, AccountDetailListView, AccountDetailCreateView
 from .views.accountView import AccountListView, AccountCreateView, AccountView
 from .views.assetsView import AssetsListView, AssetsCreateView, AssetsView
@@ -68,4 +72,8 @@ urlpatterns = [
     path('assets/', AssetsListView.as_view()),
     path('assets/create/', AssetsCreateView.as_view()),
     path('assets/<int:pk>/', AssetsView.as_view()),
-] 
+    path('tips/', TipsListView.as_view()),
+    path('tips/create/', TipsCreateView.as_view()),
+    path('tips/<int:pk>/', TipsView.as_view()),
+
+]

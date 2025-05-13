@@ -4,26 +4,26 @@ from Ahercode.models import Assets
 from Ahercode.serializers import AssetsSerializer
 
 
-# Create a new JournalDetail
+# Create a new asset
 class AssetsCreateView(generics.CreateAPIView):
     """
-    API view to create a new journalDetail entry.
+    API view to create a new asset entry.
     """
     queryset = Assets.objects.all()
     serializer_class = AssetsSerializer
 
-# Get all JournalDetails
+# Get all asset
 class AssetsListView(generics.ListAPIView):
     """
-    API view to retrieve a list of journalDetail entries.
+    API view to retrieve a list of asset entries.
     """
     queryset = Assets.objects.all()
     serializer_class = AssetsSerializer
 
-# Get a single JournalDetail, update, and delete
+# Get a single asset, update, and delete
 class AssetsView(generics.RetrieveUpdateDestroyAPIView):
     """
-    API view to retrieve, update, or delete a journalDetail entry.
+    API view to retrieve, update, or delete a asset entry.
     """
     queryset = Assets.objects.all()
     serializer_class = AssetsSerializer
