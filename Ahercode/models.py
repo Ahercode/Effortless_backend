@@ -120,6 +120,7 @@ class InExDetails(models.Model):
     selected_bank = models.IntegerField(default=0)
     status = models.CharField(max_length=100, default="unreconciled")
     posted = models.BooleanField(default=False)
+    tag = models.ForeignKey('Tags', on_delete=models.CASCADE, blank=True, null=True)
     
 
     def __str__(self):
@@ -135,6 +136,7 @@ class Transactions(models.Model):
     description = models.TextField(blank=True, null=True)
     debit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     credit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    tag = models.ForeignKey('Tags', on_delete=models.CASCADE, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         # Use a transaction to ensure consistency for grouped transactions
@@ -227,3 +229,13 @@ class Tips(models.Model):
 
     def __str__(self):
         return self.date
+
+
+class Tags(models.Model):
+    subscriber = models.ForeignKey(Subscribers, on_delete=models.CASCADE)
+    code = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
