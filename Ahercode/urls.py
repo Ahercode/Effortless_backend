@@ -17,6 +17,7 @@ from .views.journalHeaderView import JournalHeaderListView, \
     JournalHeaderCreateView, JournalHeaderView
 from .views.partyView import PartyListView, PartyCreateView, PartyDetailView
 from .views.subscriberUsersView import SubscriberUserListView, SubscriberUserCreateView, SubscriberUserDetailView
+from .views.tagsView import TagsListView, TagsCreateView, TagsView
 from .views.transactionsView import TransactionsListView, TransactionsDetailView, TransactionsCreateView
 from .views.userView import UserCreateView, UserListView, UserDetailView
 from .views.authView import LoginView, ChangePasswordView, ResetPasswordView
@@ -69,10 +70,13 @@ urlpatterns = [
     path('crm/<int:pk>/', CRMView.as_view()),
     path('assets/', AssetsListView.as_view()),
     path('assets/create/', AssetsCreateView.as_view()),
-    path('assets/<int:pk>/', AssetsView.as_view()),~
+    path('assets/<int:pk>/', AssetsView.as_view()),
     path('tips/', TipsListView.as_view()),
     path('tips/create/', TipsCreateView.as_view()),
     path('tips/<int:pk>/', TipsView.as_view()),
-    path('reconciliation/', ReconciliationView.as_view(), name='reconciliation')
+    path('reconciliation/', ReconciliationView.as_view(), name='reconciliation'),
+    path('tags/', TagsListView.as_view()),
+    path('tags/create/', TagsCreateView.as_view()),
+    path('tags/<int:pk>/', TagsView.as_view()),
 
 ]
