@@ -13,10 +13,10 @@ from Ahercode.models import Subscribers
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     
-    username_field = 'email'  # Use email as the username field
+    username_field = 'email' 
     
     def validate(self, attrs):
-        email = attrs.get(self.username_field)  # `username` is used by default for JWT
+        email = attrs.get(self.username_field)  
         password = attrs.get("password")
 
         # Check if the subscriber exists

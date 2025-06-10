@@ -1,6 +1,7 @@
 
 
-from django.db import models
+import os
+from django.db import models, transaction
 
 # Create your models here.
 
@@ -136,20 +137,35 @@ class Transactions(models.Model):
     credit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        if not self.bach_id:  # Generate only if batch_id is empty
-            last_transaction = Transactions.objects.filter(
-                subscriber=self.subscriber
-            ).order_by('-id').first()
+        # Use a transaction to ensure consistency for grouped transactions
+        with transaction.atomic():
+            if not self.bach_id:  # Generate only if batch_id is empty
+                # Check if there are other transactions being saved together
+                grouped_transactions = Transactions.objects.filter(
+                    subscriber=self.subscriber,
+                    transaction_date=self.transaction_date,
+                    reference_number=self.reference_number,
+                ).order_by('-id')
 
-            if last_transaction and last_transaction.bach_id:
-                last_number = int(last_transaction.bach_id.split('-')[1])  # Extract last part
-                next_number = last_number + 1
-            else:
-                next_number = 1  # First transaction for this subscriber
+                if grouped_transactions.exists():
+                    # Use the same batch ID for grouped transactions
+                    self.bach_id = grouped_transactions.first().bach_id
+                else:
+                    # Get the last transaction for the same subscriber
+                    last_transaction = Transactions.objects.filter(
+                        subscriber=self.subscriber
+                    ).order_by('-id').first()
 
-            self.bach_id = f"{self.subscriber.id:05d}-{next_number:05d}"
+                    if last_transaction and last_transaction.bach_id:
+                        last_number = int(last_transaction.bach_id.split('-')[1])  # Extract last part
+                        next_number = last_number + 1
+                    else:
+                        next_number = 1  # First transaction for this subscriber
 
-        super().save(*args, **kwargs)
+                    # Generate the new batch ID
+                    self.bach_id = f"{self.subscriber.id:05d}-{next_number:05d}"
+
+            super().save(*args, **kwargs)
 
     def __str__(self):
         return self.reference_number
@@ -173,6 +189,22 @@ class CRM(models.Model):
     status = models.CharField(max_length=100, default="")
     file = models.FileField(upload_to='uploads/', blank=True, null=True)
 
+    def save(self, *args, **kwargs):
+        # Handle file replacement during updates
+        if self.pk:
+            old_instance = CRM.objects.get(pk=self.pk)
+            if old_instance.file and old_instance.file != self.file:
+                if os.path.isfile(old_instance.file.path):
+                    os.remove(old_instance.file.path)
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        # Delete the associated file when the CRM instance is deleted
+        if self.file and os.path.isfile(self.file.path):
+            os.remove(self.file.path)
+        super().delete(*args, **kwargs)
+        
+        
     def __str__(self):
         return self.note
 
