@@ -225,7 +225,7 @@ class Assets(models.Model):
 
 class Tips(models.Model):
     description = models.TextField(blank=True, null=True)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateField()
 
     def __str__(self):
         return self.date

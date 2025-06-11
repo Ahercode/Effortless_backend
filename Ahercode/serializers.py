@@ -112,6 +112,7 @@ class AssetsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class TipsSerializer(serializers.ModelSerializer):
+    date = serializers.DateField()
     class Meta:
         model = Tips
         fields = '__all__'
